@@ -1,5 +1,5 @@
 /**
- * Deletes files older than 72 hours from the "SAM Files" folder.
+ * Deletes files older than 48 hours from the "SAM Files" folder.
  */
 function deleteDatedFiles() {
   const samFolderId = "1choRG8qg-ojmcwoM5FTie1gD4FdOA5eX"; // Folder ID for the "SAM Files" folder. The ID is at the end of the folder URL: "https://drive.google.com/drive/folders/FOLDER_ID"
@@ -31,7 +31,7 @@ function deleteDatedFiles() {
     const fileId = file.getId();
 
     const deadline = new Date();
-    deadline.setDate(deadline.getDate() - 3);
+    deadline.setDate(deadline.getDate() - 2);
 
     if (fileCreatedDate <= deadline) {
       Drive.Files.remove(fileId);

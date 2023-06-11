@@ -26,7 +26,7 @@ function convertExcelFiles() {
 
     if (!sourceFileName.includes("_converted") && file.getMimeType() === "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
       Drive.Files.insert(newFile, fileBlob, { convert: true });
-      file.setName(`${sourceFileNameF}_converted`);
+      file.setName(`${sourceFileName}_converted`);
       convertedFileCount++;
     } // else console.log("This file cannot be imported.");
   }
