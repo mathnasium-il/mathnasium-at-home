@@ -143,6 +143,9 @@ async function handleWhenIWorkAuto() {
     if (!isSameData) {
       await importWhenIWorkFile(fileName);
       await setInstructorNotes();
+
+      const occupiedSlotCount = ADMIN_SCHEDULE_SHEET.getRange("B2").getValue();
+      if (occupiedSlotCount > 0) await clearScheduledStudents();
     }
     // else console.log("No new data to import.");
   } else return;

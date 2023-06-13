@@ -116,9 +116,12 @@ function handleAppointyAuto() {
 
     if (!isSameData) {
       APPTDATE_DROPDROWN.getRange("A1").setValue(`=VALUE("${Utilities.formatDate(new Date(csvDate), TIMEZONE, "M/d/YYYY")}")`);
-      APPOINTY_INTAKE_SHEET.getRange(2, 1, APPOINTY_INTAKE_SHEET.getLastRow(), APPOINTY_INTAKE_SHEET.getLastColumn()).clearContent(); // Clears current formatting with the exception of the first row
+      APPOINTY_INTAKE_SHEET.getRange(2, 1, APPOINTY_INTAKE_SHEET.getLastRow(), APPOINTY_INTAKE_SHEET.getLastColumn()).clearContent();
       APPOINTY_INTAKE_SHEET.getRange(2, 1, 1, csvData[0].length).setFontColor("#ffffff").setBackground("#ef3e33").setFontWeight("bold").setHorizontalAlignment("center");
       APPOINTY_INTAKE_SHEET.getRange(2, 1, csvData.length, csvData[0].length).setValues(csvData);
+
+      const occupiedSlotCount = ADMIN_SCHEDULE_SHEET.getRange("B2").getValue();
+      if (occupiedSlotCount > 0) clearScheduledStudents();
     } // else console.log("No new data to import.");
   } else return;
 }
