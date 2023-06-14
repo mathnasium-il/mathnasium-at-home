@@ -94,5 +94,9 @@ function updateOnEdit() {
   if (SpreadsheetApp.getActiveSheet().getName() === APPOINTY_INTAKE_SHEET.getSheetName()) handleManualSession();
   else if (SpreadsheetApp.getActiveSheet().getName() === ADMIN_SCHEDULE_SHEET.getSheetName()) hideColumns();
   else if (SpreadsheetApp.getActiveSheet().getName() === STUDENTS_SHEET.getSheetName()) generateAppointyDropdowns();
-  else if (SpreadsheetApp.getActiveSheet().getName() === STAFF_SHEET.getSheetName()) generateWhenIWorkDropdowns();
+  else if (SpreadsheetApp.getActiveSheet().getName() === WHEN_I_WORK_INTAKE_SHEET.getSheetName()) setInstructorNotes();
+  else if (SpreadsheetApp.getActiveSheet().getName() === STAFF_SHEET.getSheetName()) {
+    generateWhenIWorkDropdowns();
+    setInstructorNotes();
+  }
 }
