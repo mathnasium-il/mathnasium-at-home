@@ -127,7 +127,7 @@ function handleAppointyAuto() {
 }
 
 /**
- * Adds "Mathnasium@home" to "locationName" column when students are manually added to "Appointy Intake" worksheet.
+ * Adds "Mathnasium@home" to the "locationName" column and "Appointment Confirmed" to the "status" column when students are manually added to "Appointy Intake" worksheet.
  */
 function handleManualSession() {
   const lastRowRange = APPOINTY_INTAKE_SHEET.getRange("C3:C").getValues(); // "studentName" column
@@ -135,15 +135,15 @@ function handleManualSession() {
   sessionData.forEach((row, i) => row.push(i + 3));
 
   const APPOINTY_HEADERS = APPOINTY_INTAKE_SHEET.getRange(2, 1, 1, APPOINTY_INTAKE_SHEET.getLastColumn()).getValues().flat();
-  const LOCATION_NAME_CIN = APPOINTY_HEADERS.indexOf("locationName");
-  const APPT_DATE_CIN = APPOINTY_HEADERS.indexOf("appointmentDate");
-  const STUDENT_NAME_CIN = APPOINTY_HEADERS.indexOf("studentName");
-  const SESSION_TYPE_CIN = APPOINTY_HEADERS.indexOf("Session Type");
+  const [LOCATION_NAME_CIN, APPT_DATE_CIN, STUDENT_NAME_CIN, SESSION_TYPE_CIN, STATUS_CIN] = [APPOINTY_HEADERS.indexOf("locationName"), APPOINTY_HEADERS.indexOf("appointmentDate"), APPOINTY_HEADERS.indexOf("studentName"), APPOINTY_HEADERS.indexOf("Session Type"), APPOINTY_HEADERS.indexOf("status")];
 
   const filteredSessionData = sessionData.filter(row => row[LOCATION_NAME_CIN] === "" && row[APPT_DATE_CIN] !== "" && row[STUDENT_NAME_CIN] !== "" && row[SESSION_TYPE_CIN] !== "");
 
   if (filteredSessionData.length > 0) {
-    filteredSessionData.forEach(row => APPOINTY_INTAKE_SHEET.getRange(row[row.length - 1], LOCATION_NAME_CIN + 1).setValue("Mathnasium@home"));
+    filteredSessionData.forEach(row => {
+      APPOINTY_INTAKE_SHEET.getRange(row[row.length - 1], LOCATION_NAME_CIN + 1).setValue("Mathnasium@home");
+      APPOINTY_INTAKE_SHEET.getRange(row[row.length - 1], STATUS_CIN + 1).setValue("Appointment Confirmed");
+    });
   }
 }
 
