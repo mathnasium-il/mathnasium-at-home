@@ -137,7 +137,7 @@ function handleManualSession() {
   const APPOINTY_HEADERS = APPOINTY_INTAKE_SHEET.getRange(2, 1, 1, APPOINTY_INTAKE_SHEET.getLastColumn()).getValues().flat();
   const [LOCATION_NAME_CIN, APPT_DATE_CIN, STUDENT_NAME_CIN, SESSION_TYPE_CIN, STATUS_CIN] = [APPOINTY_HEADERS.indexOf("locationName"), APPOINTY_HEADERS.indexOf("appointmentDate"), APPOINTY_HEADERS.indexOf("studentName"), APPOINTY_HEADERS.indexOf("Session Type"), APPOINTY_HEADERS.indexOf("status")];
 
-  const filteredSessionData = sessionData.filter(row => row[LOCATION_NAME_CIN] === "" && row[APPT_DATE_CIN] !== "" && row[STUDENT_NAME_CIN] !== "" && row[SESSION_TYPE_CIN] !== "");
+  const filteredSessionData = sessionData.filter(row => (row[LOCATION_NAME_CIN] === "" || row[STATUS_CIN] === "") && row[APPT_DATE_CIN] !== "" && row[STUDENT_NAME_CIN] !== "" && row[SESSION_TYPE_CIN] !== "");
 
   if (filteredSessionData.length > 0) {
     filteredSessionData.forEach(row => {
